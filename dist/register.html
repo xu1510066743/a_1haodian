@@ -3,7 +3,133 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/commont.css"/>
+		<link rel="stylesheet" type="text/css" href="css/register.css"/>
+		
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/register.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
+		<div class="head">
+			<a href="" class="head_logo">
+				<img src="images/c2logo.jpg" />
+			</a>
+			<div class="head_r">
+				<span>您好，欢迎光临1号店！<a href="login.html">请登录</a></span>
+				<p><i class="iconfont">&#xe642;</i><a href="">帮助中心</a></p>
+			</div>
+		</div>
+		<div class="main-wrap">
+			<div class="main">
+				<div class="main_in">
+					<h4>1号店注册</h4>
+					<form class="bd">
+						
+						<input type="txt" name="" id="" value="" />		
+						<p style="position: absolute;top: 20px;left: 15px;">用户名</p>
+						<span>5-14字符,可由下划线，英文，或数字组成，不能以数字开头</span><br/>
+						
+						
+						<input type="password" name="" id="" value="" />	
+						<p style="position: absolute;top: 87px;left: 15px;">密码</p>
+						<span>6-14位，可由下划线，英文，或数字组成</span><br/>
+						
+						
+						
+						
+						<input type="txt" name="" id="" value="" />		
+						<p style="position: absolute;top: 150px;left: 15px;">邮箱</p>
+						<span>请输入正确的邮箱</span><br/>
+						
+						
+						<input type="txt" name="" id="" value="" />		
+						<p style="position: absolute;top: 219px;left: 15px;">性别</p>
+						<span>请输入你的性别</span><br/>
+						<em>点击注册，表示您同意1号店</em><a href="">《服务协议及隐私声明》</a><br />
+						<input type="button" name="" id="" value="同意协议并注册"  style="width: 330px;"/>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<div class="foot">
+			<div class="foot_t">
+				<a>沪ICP备16050468号</a>
+				<a>沪B2-20170039</a>
+				<a style="border: 0;">营业执照</a>
+			</div>
+				
+			
+			<div class="foot_b">
+				<p>Copyright&copy;1号店网上超市 2007-2018，All Rights Reserved</p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				$(".bd input").focus(function(){
+					$(this).next().stop().animate({"left":"-50px"})
+					//console.log("aaa")
+				})
+				//注册
+				$("input").eq(4).click(function(){
+					var data={
+						username:$("input").eq(0).val(),
+						password:$("input").eq(1).val(),
+						email:$("input").eq(2).val(),
+						sex:$("input").eq(3).val()
+					}
+					$.post("http://47.104.244.134:8080/usersave.do",data,function(data){
+						console.log(data);
+						if(data.code==0){
+							alert("注册成功");
+							location.href="login.html";
+						}
+						
+					})
+				})
+				
+				$(".bd input").focus(function(){
+			
+					$(this).next().next().fadeIn();
+				})
+				$(".bd input").focusout(function(){
+	
+					$(this).next().next().html("内容不能为空");
+				})
+				
+				var reg1 =/^[a-zA-Z_]\w{5,14}$/;//用户名
+				var reg2 =/^[a-zA-Z_]\w{5,14}$/;//密码
+				var reg3 =/[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;//邮箱
+				
+				
+				$("input").eq(0).change(function(){
+					var val1 =$(this).val();
+					if(!reg1.test(val1)){
+					alert("用户名格式错误");					
+					}else{
+						$(this).next().next().fadeOut();
+					}
+				})
+				$("input").eq(1).change(function(){
+					var val2 =$(this).val();
+					if(!reg2.test(val2)){
+					alert("密码格式不正确");					
+					}else{
+						$(this).next().next().fadeOut();
+					}
+				})
+				$("input").eq(2).change(function(){
+					var val3 =$(this).val();
+					if(!reg3.test(val3)){
+					alert("请输入正确的邮箱");					
+					}else{
+						$(this).next().next().fadeOut();
+					}
+				})
+				
+				
+			})
+		</script>
 	</body>
 </html>

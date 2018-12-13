@@ -16,7 +16,7 @@ a {
   text-decoration: none;
   color: #333; }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, b {
   font-weight: 100; }
 
 body {
@@ -25,3 +25,6 @@ body {
 
 input, a {
   outline: none; }
+
+em, i {
+  font-style: normal; }
